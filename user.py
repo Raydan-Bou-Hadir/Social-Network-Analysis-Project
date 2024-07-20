@@ -33,4 +33,8 @@ class User:
     def addInterest(self, interest):
         self.interests.append(interest)
 
+    def removeInterest(self, interest):
+        if interest in self.interests:
+            self.interests.remove(interest)
+
 
