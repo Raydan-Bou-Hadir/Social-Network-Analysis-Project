@@ -44,3 +44,4 @@ class User:
         if post in self.posts:
             self.posts.remove(post)
 
+
