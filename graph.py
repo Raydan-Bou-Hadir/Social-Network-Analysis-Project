@@ -114,3 +114,6 @@ class Graph:
     def sortUserByName(self):
         return sorted(self.users.values(), key=lambda user: user.name)
     
+    def sortUserByNumFriends(self):
+        return sorted(self.users.values(), key=lambda user: len(user.friends), reverse=True)
+
