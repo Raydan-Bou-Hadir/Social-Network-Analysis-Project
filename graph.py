@@ -19,3 +19,9 @@ class Graph:
             self.users[userId] = User(userId, name, email, age)
             return True
         return False
+    
+    def removeUser(self, userId):
+        if userId in self.users:
+            del self.users[userId]
+            return True
+        return False
