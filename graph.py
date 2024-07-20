@@ -1,5 +1,6 @@
 from verify_email import verify_email
 from collections import deque
+import heapq
 import User
 
 class Graph:
@@ -77,4 +78,26 @@ class Graph:
             if friend.userId not in visited:
                 result.extend(self.dfs(friend.userId, visited))
         return result
+
+    def dijkstra(self, startUserId, endUserId):
+        if startUserId not in self.users or endUserId not in self.users:
+            return 'User not found.'
+
+        distances = {userId: float('inf')for userId in self.users}
+        distances[startUserId] = 0
+        queue = [(0, startUserId)]
+
+        while queue:
+            currDistance, currUserId = heapq.heappop(queue)
+
+            if currUserId == endUserId:
+                return currDistance
+            
+            for friend in self.users[currUserId].friends:
+                distance = currDistance + 1
+
+                if distance < distances[friend.userId]:
+                    distances[friend.userId] = distance
+                    heapq.heappush(queue, (distance, friend.userId))
+        return -1
 
