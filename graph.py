@@ -33,3 +33,10 @@ class Graph:
             return True
         return False
 
+    def removeRelationship(self, userId1, userId2):
+        if userId1 in self.users and userId2 in self.users:
+            self.users[userId1].unFollow(userId2)
+            self.users[userId2].unFollow(userId1)
+            return True
+        return False
+
