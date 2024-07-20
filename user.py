@@ -37,4 +37,7 @@ class User:
         if interest in self.interests:
             self.interests.remove(interest)
 
+    def addPost(self, post):
+        self.posts.append(post)
+
 
