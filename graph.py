@@ -101,3 +101,13 @@ class Graph:
                     heapq.heappush(queue, (distance, friend.userId))
         return -1
 
+    def linkedParts(self):
+        visited = set()
+        components = []
+
+        for userId in self.users:
+            if userId not in visited:
+                component = self.dfs(userId, visited)
+                components.append(component)
+        return components
+  
