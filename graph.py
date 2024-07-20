@@ -25,3 +25,11 @@ class Graph:
             del self.users[userId]
             return True
         return False
+
+    def addRelationship(self, userId1, userId2):
+        if userId1 in self.users and userId2 in self.users:
+            self.users[userId1].addFriend(userId2)
+            self.users[userId2].addFriend(userId1)
+            return True
+        return False
+
