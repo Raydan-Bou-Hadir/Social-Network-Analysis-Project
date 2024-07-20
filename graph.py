@@ -174,3 +174,34 @@ class Graph:
 
         return clusteringCoefficients
     
+    def recommendedFriends(self, userId, rule = 'mutual'):
+        if userId not in self.users:
+            return []
+        
+        recommend = []
+        user = self.users[userId]
+
+        if rule == 'mutual':
+            mutualCount = {}
+            
+            for friend in user.friends:
+                for mutualFriend in friend.friends:
+                    if mutualFriend != user and mutualFriend not in user.friends:
+                        if mutualFriend.userId not in mutualCount:
+                            mutualCount[mutualFriend.userId] = 0
+                        mutualCount[mutualFriend.userId] += 1
+
+            recommend = sorted(mutualCount.items(), key=lambda item: item[1], reverse=True)
+            recommend = [self.users[userId] for userId, _ in recommend]
+        elif rule == 'interests':
+            interestCount = {}
+
+            for possibleFriend in self.users.values():
+                if possibleFriend != user and possibleFriend not in user.friends:
+                    sameInterest = len(set(user.interests) & set(possibleFriend.interest))
+                    if sameInterest > 0:
+                        interestCount[possibleFriend.userId] = sameInterest
+            recommend = sorted(interestCount.items(), key=lambda item: item[1], reverse=True)
+            recommend = [self.users[userId] for userId, _ in recommend]
+        
+        return recommend
