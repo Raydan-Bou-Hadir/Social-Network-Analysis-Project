@@ -126,3 +126,30 @@ class Graph:
                 return user
         return None
 
+    def calcNetworkStatic(self):
+        numUsers = len(self.users)
+
+        if numUsers == 0:
+            return {
+                'Average Friends': 0,
+                'Density': 0,
+                'Clustering Coefficients': 0
+            }
+        
+        totalFriends = sum(len(user.friends) for user in self.users.value())
+        averageFriends = totalFriends / numUsers
+
+        possibleRelationships = numUsers * (numUsers - 1)
+        actualRelationships = totalFriends
+        if possibleRelationships != 0:
+            density = actualRelationships / possibleRelationships
+        else:
+            density = 0
+
+        clusteringCoefficients = self.calcClusteringCoefficients()
+
+        return {
+            "Average Friends": averageFriends,
+            'Density': density,
+            'Clustering Coefficients': clusteringCoefficients
+        }
