@@ -15,4 +15,10 @@ class User:
         else:
             print('Already a friend.')
 
+    def unFollow(self, friend):
+        if friend not in self.friends:
+            print('Already removed.')
+        else:
+            self.friends.remove(friend)
+            print('Removed successfully.')
 
