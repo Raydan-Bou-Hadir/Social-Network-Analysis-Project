@@ -1,4 +1,5 @@
 from verify_email import verify_email
+from collections import deque
 import User
 
 class Graph:
@@ -46,3 +47,18 @@ class Graph:
             return True
         return False
 
+    def bfs(self, startUserId):
+        if startUserId not in self.users:
+            return 'User not found.'
+        
+        visited = set()
+        queue = deque([startUserId])
+        result = []
+    
+        while queue:
+            userId = queue.popleft()
+            if userId not in visited:
+                visited.add(userId)
+                result.append(self.users[userId].name)
+                queue.extend(self.users[userId].friends)
+        return result
