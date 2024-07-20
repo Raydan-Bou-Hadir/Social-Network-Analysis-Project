@@ -153,3 +153,24 @@ class Graph:
             'Density': density,
             'Clustering Coefficients': clusteringCoefficients
         }
+
+    def calcClusteringCoefficients(self):
+        clusteringCoefficients = {}
+
+        for userId, user in self.users.items():
+            if len(user.friends) < 2:
+                clusteringCoefficients[userId] = 0
+            
+            possibleFriendships = len(user.friends) * (len(user.friends) - 1) / 2
+            actualFriendships = 0
+
+            for friend in user.friends:
+                for mutualFriend in user.friends:
+                    if friend != mutualFriend and mutualFriend in friend.friends:
+                        actualFriendships +=1
+
+            actualFriendships /= 2
+            clusteringCoefficients[userId] = actualFriendships /possibleFriendships
+
+        return clusteringCoefficients
+    
