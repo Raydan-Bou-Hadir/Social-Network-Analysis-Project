@@ -111,3 +111,6 @@ class Graph:
                 components.append(component)
         return components
   
+    def sortUserByName(self):
+        return sorted(self.users.values(), key=lambda user: user.name)
+    
