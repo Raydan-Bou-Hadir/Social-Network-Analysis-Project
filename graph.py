@@ -62,3 +62,19 @@ class Graph:
                 result.append(self.users[userId].name)
                 queue.extend(self.users[userId].friends)
         return result
+
+    def dfs(self, startUserId, visited = None):
+        if startUserId not in self.users:
+            return 'User not found.'
+        
+        if visited is None:
+            visited = set()
+
+        visited.add(startUserId)
+        result = [self.users[startUserId].name]
+
+        for friend in self.users[startUserId].friends:
+            if friend.userId not in visited:
+                result.extend(self.dfs(friend.userId, visited))
+        return result
+
