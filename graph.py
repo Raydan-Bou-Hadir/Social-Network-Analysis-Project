@@ -40,3 +40,9 @@ class Graph:
             return True
         return False
 
+    def updateUserProfile(self, userId, name=None, interests=None, posts=None):
+        if userId in self.users:
+            self.users[userId].updateProfile(name, interests, posts)
+            return True
+        return False
+
