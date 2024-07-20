@@ -22,3 +22,15 @@ class User:
             self.friends.remove(friend)
             print('Removed successfully.')
 
+    def updateProfile(self, name=None, interest=None, post=None):
+        if name is not None:
+            self.name = name
+        if interest is not None:
+            self.interest = interest
+        if post is not None:
+            self.post = post
+    
+    def addInterest(self, interest):
+        self.interests.append(interest)
+
+
