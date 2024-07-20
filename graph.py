@@ -120,3 +120,9 @@ class Graph:
     def searchUserById(self, userId):
         return self.users.get(userId)
 
+    def searchUserByname(self, name):
+        for user in self.users.values():
+            if user.name == name:
+                return user
+        return None
+
