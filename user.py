@@ -40,4 +40,7 @@ class User:
     def addPost(self, post):
         self.posts.append(post)
 
+    def removePost(self, post):
+        if post in self.posts:
+            self.posts.remove(post)
 
