@@ -1,12 +1,12 @@
 import Graph
 import User
 
-def mergeSorted(users, key=lambda x:x.name):
+def mergeSort(users, key=lambda x:x.name):
     if len(users) <= 1:
         return users
     mid = len(users) // 2
-    left = mergeSorted(users[:mid], key)
-    right = mergeSorted(users[mid:], key)
+    left = mergeSort(users[:mid], key)
+    right = mergeSort(users[mid:], key)
     return merge(left, right, key)
 
 def merge (left, right, key):
