@@ -2,6 +2,8 @@ from verify_email import verify_email
 from collections import deque
 import heapq
 import User
+import MergeSort
+import BinarySearch
 
 class Graph:
     def __init__(self):
@@ -111,14 +113,16 @@ class Graph:
                 components.append(component)
         return components
   
-    def sortUserByName(self):
-        return sorted(self.users.values(), key=lambda user: user.name)
-    
-    def sortUserByNumFriends(self):
-        return sorted(self.users.values(), key=lambda user: len(user.friends), reverse=True)
+    def sortUserByName(self, criteria='name'):
+        if criteria == 'name':
+            return MergeSort.mergeSort(list(self.users.values()), key=lambda user: user.name)
+        elif criteria == 'numFriends':
+            return MergeSort.mergeSort(list(self.users.values()), key=lambda user: len(user.friends))
+        return []
 
     def searchUserById(self, userId):
-        return self.users.get(userId)
+        users = MergeSort.mergeSort(list(self.users.values()), key=lambda user: user.userId)
+        return BinarySearch.binarySearch(users, userId, key=lambda user: user.userId)
 
     def searchUserByname(self, name):
         for user in self.users.values():
