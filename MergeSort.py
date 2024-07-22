@@ -1,4 +1,4 @@
-import Graph
+import GraphFile
 import User
 
 def mergeSort(users, key=lambda x:x.name):
