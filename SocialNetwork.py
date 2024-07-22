@@ -151,3 +151,19 @@ class SocialNetwork:
                 messagebox.showinfo("Success", "Relationship added successfully.")
             else:
                 messagebox.showwarning("Warning", "One or both users not found.")
+
+    def removeRelationship(self):
+        userId1 = self.remove_user_id1_entry.get()
+        userId2 = self.remove_user_id2_entry.get()
+        if userId1 and userId2:
+            if self.graph.removeRelationship(userId1, userId2):
+                messagebox.showinfo("Success", "Relationship removed successfully.")
+            else:
+                messagebox.showwarning("Warning", "One or both users not found.")
+
+    def sortUsersByName(self):
+        sorted_users = self.graph.sortUserByName()
+        details = ""
+        for user in sorted_users:
+            details += f"User ID: {user.userId}, Name: {user.name}\n"
+        messagebox.showinfo("Sorted Users by Name", details)
