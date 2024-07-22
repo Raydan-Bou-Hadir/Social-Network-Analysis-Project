@@ -90,3 +90,6 @@ while running:
             print(f'Average number of friends per user: {stats["Average Friends"]}')
             print(f'Network density: {stats["Density"]}')
             print(f'Clustering coefficients: {stats["Clustering Coefficients"]}')
+        
+        elif choice == '8':
+            graph.visualize()
