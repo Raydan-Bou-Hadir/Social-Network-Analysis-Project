@@ -199,3 +199,11 @@ class SocialNetwork:
                 messagebox.showinfo("User Details", details)
             else:
                 messagebox.showwarning("Warning", "User not found.")
+
+    def visualize(self):
+        self.graph.visualize()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = SocialNetwork(root)
+    root.mainloop()
