@@ -53,3 +53,20 @@ while running:
                 print(result)
             else:
                 print(result)
+
+        elif choice == '5':
+            userId = input('Enter user ID: ')
+            name = input('Enter new name (or press Enter to skip): ')
+            interests = input('Enter new interests (comma-separated, or press Enter to skip): ').split(',')
+            posts = input('Enter new posts (comma-separated, or press Enter to skip): ').split(',')
+            if not name:
+                name = None
+            if not interests:
+                interests = None
+            if not posts:
+                posts = None
+            result = graph.updateUserProfile(userId, name, interests, posts)
+            if result:
+                print(result)
+            else:
+                print(result)
