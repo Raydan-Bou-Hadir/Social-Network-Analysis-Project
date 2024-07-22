@@ -67,3 +67,21 @@ class SocialNetwork:
 
         self.remove_user_button = tk.Button(self.root, text="Submit", command=self.removeUser)
         self.remove_user_button.pack(pady=5)
+
+    def addRelationshipWidgets(self):
+        # Add Relationship Widgets
+        tk.Label(self.root, text="Add Relationship").pack(pady=10)
+
+        add_relationship_frame = tk.Frame(self.root)
+        add_relationship_frame.pack(pady=5)
+
+        self.user_id1_entry = tk.Entry(add_relationship_frame)
+        self.user_id1_entry.grid(row=0, column=0)
+        tk.Label(add_relationship_frame, text="User ID 1").grid(row=0, column=1)
+
+        self.user_id2_entry = tk.Entry(add_relationship_frame)
+        self.user_id2_entry.grid(row=1, column=0)
+        tk.Label(add_relationship_frame, text="User ID 2").grid(row=1, column=1)
+
+        self.add_relationship_button = tk.Button(self.root, text="Submit", command=self.addRelationship)
+        self.add_relationship_button.pack(pady=5)
