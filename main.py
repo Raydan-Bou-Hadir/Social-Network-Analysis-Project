@@ -93,3 +93,9 @@ while running:
         
         elif choice == '8':
             graph.visualize()
+
+        elif choice == '0':
+            running = False  # Set the flag to False to exit the loop
+
+        else:
+            print('Invalid choice. Please try again.')
