@@ -84,3 +84,9 @@ while running:
                 print(f'Posts: {user.posts}')
             else:
                 print('User not found.')
+        
+        elif choice == '7':
+            stats = graph.calcNetworkStatic()
+            print(f'Average number of friends per user: {stats["Average Friends"]}')
+            print(f'Network density: {stats["Density"]}')
+            print(f'Clustering coefficients: {stats["Clustering Coefficients"]}')
