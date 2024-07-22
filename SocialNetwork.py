@@ -167,3 +167,35 @@ class SocialNetwork:
         for user in sorted_users:
             details += f"User ID: {user.userId}, Name: {user.name}\n"
         messagebox.showinfo("Sorted Users by Name", details)
+
+    def searchUserById(self):
+        userId = simpledialog.askstring("Input", "Enter user ID to search:")
+        if userId:
+            user = self.graph.searchUserById(userId)
+            if user:
+                details = (f"User ID: {user.userId}\n"
+                           f"Name: {user.name}\n"
+                           f"Email: {user.email}\n"
+                           f"Age: {user.age}\n"
+                           f"Friends: {[friend.userId for friend in user.friends]}\n"
+                           f"Interests: {user.interests}\n"
+                           f"Posts: {user.posts}")
+                messagebox.showinfo("User Details", details)
+            else:
+                messagebox.showwarning("Warning", "User not found.")
+
+    def searchUserByName(self):
+        name = simpledialog.askstring("Input", "Enter user name to search:")
+        if name:
+            user = self.graph.searchUserByName(name)
+            if user:
+                details = (f"User ID: {user.userId}\n"
+                           f"Name: {user.name}\n"
+                           f"Email: {user.email}\n"
+                           f"Age: {user.age}\n"
+                           f"Friends: {[friend.userId for friend in user.friends]}\n"
+                           f"Interests: {user.interests}\n"
+                           f"Posts: {user.posts}")
+                messagebox.showinfo("User Details", details)
+            else:
+                messagebox.showwarning("Warning", "User not found.")
