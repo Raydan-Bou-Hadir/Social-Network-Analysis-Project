@@ -27,3 +27,11 @@ while running:
                 print(result)
             else:
                 print(result)
+        
+        elif choice == '2':
+            userId = input('Enter user ID: ')
+            result = graph.removeUser(userId)
+            if result:
+                print(result)
+            else:
+                print(result)
