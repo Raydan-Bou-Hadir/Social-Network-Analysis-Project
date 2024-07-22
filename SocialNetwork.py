@@ -117,3 +117,20 @@ class SocialNetwork:
 
     def exitButton(self):
         tk.Button(self.root, text="Exit", command=self.root.quit).pack(pady=10)
+
+    def addUser(self):
+        userId = self.user_id_entry.get()
+        name = self.name_entry.get()
+        email = self.email_entry.get()
+        age = self.age_entry.get()
+        if userId and name and email and age:
+            try:
+                age = int(age)
+                if self.graph.addUser(userId, name, email, age):
+                    messagebox.showinfo("Success", "User added successfully.")
+                else:
+                    messagebox.showwarning("Warning", "User ID already exists.")
+            except ValueError:
+                messagebox.showwarning("Warning", "Age must be an integer.")
+        else:
+            messagebox.showwarning("Warning", "All fields must be filled.")
