@@ -102,3 +102,6 @@ class SocialNetwork:
     
     def viewUserDetailsWidget(self):
         tk.Button(self.root, text="View User Details", command=self.searchUserById).pack(pady=10)
+    
+    def sortUsersByNameWidget(self):
+        tk.Button(self.root, text="Sort Users by Name", command=self.sortUsersByName).pack(pady=10)
