@@ -1,7 +1,7 @@
 from verify_email import verify_email
 from collections import deque
 import heapq
-import User
+from User import User
 import MergeSort
 import BinarySearch
 import networkx as nx
@@ -12,45 +12,52 @@ class Graph:
         self.users = {} #Dictionary for userId
 
     def addUser(self, userId, name, email, age):
-        if not isinstance(name, str):
-            return 'Invalid name.'
+        if not userId.isalnum():
+            return 'Invalid user ID. User ID should only contain alphanumeric characters.'
         
-        if not verify_email(email):
-            return
-        
-        if not isinstance(age, int) or 18 > age > 100:
-            return 'Invalid age number'
-        
-        if userId not in self.users:
+        elif not isinstance(name, str) or not name.isalpha():
+            return 'Invalid name. Name should be a string containing only alphabets.'
+    
+        elif not verify_email(email):
+            return 'Invalid email format.'
+
+        elif not isinstance(age, int) or not (18 <= age <= 100):
+            return 'Invalid age. Age should be an integer between 18 and 100.'
+
+        elif userId not in self.users:
             self.users[userId] = User(userId, name, email, age)
-            return True
-        return False
+            return 'Added Successfully'
+        
+        else: 
+            return 'User ID already exists.'
     
     def removeUser(self, userId):
         if userId in self.users:
             del self.users[userId]
-            return True
-        return False
+            return 'User removed successfully.'
+        return 'User not found.'
 
     def addRelationship(self, userId1, userId2):
         if userId1 in self.users and userId2 in self.users:
-            self.users[userId1].addFriend(userId2)
-            self.users[userId2].addFriend(userId1)
-            return True
-        return False
+            user1 = self.users[userId1]
+            user2 = self.users[userId2]
+            user1.addFriend(user2)
+            user2.addFriend(user1)
+            return 'Added successfully.'
+        return 'One of both is not a user.'
 
     def removeRelationship(self, userId1, userId2):
         if userId1 in self.users and userId2 in self.users:
             self.users[userId1].unFollow(userId2)
             self.users[userId2].unFollow(userId1)
-            return True
-        return False
+            return 'Relationship removed successfully.'
+        return 'One of both is not a user.'
 
     def updateUserProfile(self, userId, name=None, interests=None, posts=None):
         if userId in self.users:
             self.users[userId].updateProfile(name, interests, posts)
-            return True
-        return False
+            return 'User profile updated successfully.'
+        return 'User not found.'
 
     def bfs(self, startUserId):
         if startUserId not in self.users:
@@ -140,7 +147,7 @@ class Graph:
                 'Clustering Coefficients': 0
             }
         
-        totalFriends = sum(len(user.friends) for user in self.users.value())
+        totalFriends = sum(len(user.friends) for user in self.users.values  ())
         averageFriends = totalFriends / numUsers
 
         possibleRelationships = numUsers * (numUsers - 1)
@@ -153,13 +160,13 @@ class Graph:
         clusteringCoefficients = self.calcClusteringCoefficients()
 
         return {
-            "Average Friends": averageFriends,
+            'Average Friends': averageFriends,
             'Density': density,
             'Clustering Coefficients': clusteringCoefficients
         }
 
     def calcClusteringCoefficients(self):
-        clusteringCoefficients = {}
+        clusteringCoefficients = {} 
 
         for userId, user in self.users.items():
             if len(user.friends) < 2:
@@ -173,52 +180,24 @@ class Graph:
                     if friend != mutualFriend and mutualFriend in friend.friends:
                         actualFriendships +=1
 
-            actualFriendships /= 2
-            clusteringCoefficients[userId] = actualFriendships /possibleFriendships
+            if possibleFriendships > 0:
+                clusteringCoefficients[userId] = actualFriendships / possibleFriendships
+            else:
+                clusteringCoefficients[userId] = 0
 
         return clusteringCoefficients
-    
-    def recommendedFriends(self, userId, rule = 'mutual'):
-        if userId not in self.users:
-            return 'User not found'
-        
-        recommend = []
-        user = self.users[userId]
-
-        if rule == 'mutual':
-            mutualCount = {}
-            
-            for friend in user.friends:
-                for mutualFriend in friend.friends:
-                    if mutualFriend != user and mutualFriend not in user.friends:
-                        if mutualFriend.userId not in mutualCount:
-                            mutualCount[mutualFriend.userId] = 0
-                        mutualCount[mutualFriend.userId] += 1
-
-            recommend = sorted(mutualCount.items(), key=lambda item: item[1], reverse=True)
-            recommend = [self.users[userId] for userId, _ in recommend]
-        elif rule == 'interests':
-            interestCount = {}
-
-            for possibleFriend in self.users.values():
-                if possibleFriend != user and possibleFriend not in user.friends:
-                    sameInterest = len(set(user.interests) & set(possibleFriend.interest))
-                    if sameInterest > 0:
-                        interestCount[possibleFriend.userId] = sameInterest
-            recommend = sorted(interestCount.items(), key=lambda item: item[1], reverse=True)
-            recommend = [self.users[userId] for userId, _ in recommend]
-        
-        return recommend
     
     def visualize(self):
         Gr = nx.Graph()
 
         for userId, user in self.users.items():
-            Gr.add_node(userId, label=user.name)
+            Gr.add_node(userId)
             for friend in user.friends:
                 Gr.add_edge(userId, friend.userId)
 
         pos = nx.spring_layout(Gr)
-        labels = nx.get_node_attributes(Gr, 'label')
-        nx.draw(Gr, pos, labels=labels, withLabels = True, nodeSize = 500, nodeColor = 'blue', fontColor = 'black', fontWeight='bold')
+        labels = {userId: userId for userId in self.users.keys()}
+
+        plt.figure(figsize=(10, 10))
+        nx.draw(Gr, pos, labels=labels, with_labels = True, node_size = 500, node_color = 'blue', font_color = 'black', font_weight='bold')
         plt.show()
