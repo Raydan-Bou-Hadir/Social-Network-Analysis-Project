@@ -11,7 +11,8 @@ class SocialNetwork:
         self.graph = GraphFile.Graph()
         self.root = root
         self.root.title("Social Network")
-    
+
+        # Create UI Elements
         self.createWidgets()
 
     def createWidgets(self):
@@ -22,6 +23,9 @@ class SocialNetwork:
         self.addRelationshipWidgets()
         self.removeRelationshipWidgets()
         self.viewUserDetailsWidget()
+        self.sortUsersByNameWidget()
+        self.searchUserByIdWidget()
+        # self.searchUserByNameWidget()
         self.visualizeGraphWidget()
         self.exitButton()
 
