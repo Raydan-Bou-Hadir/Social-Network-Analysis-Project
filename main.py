@@ -70,3 +70,17 @@ while running:
                 print(result)
             else:
                 print(result)
+
+        elif choice == '6':
+            userId = input('Enter user ID: ')
+            user = graph.searchUserById(userId)
+            if user:
+                print(f'User ID: {user.userId}')
+                print(f'Name: {user.name}')
+                print(f'Email: {user.email}')
+                print(f'Age: {user.age}')
+                print(f'Friends: {[friend.userId for friend in user.friends]}')
+                print(f'Interests: {user.interests}')
+                print(f'Posts: {user.posts}')
+            else:
+                print('User not found.')
