@@ -44,3 +44,12 @@ while running:
                 print(result)
             else:
                 print(result)
+        
+        elif choice == '4':
+            userId1 = input('Enter user ID 1: ')
+            userId2 = input('Enter user ID 2: ')
+            result = graph.removeRelationship(userId1, userId2)
+            if result:
+                print(result)
+            else:
+                print(result)
