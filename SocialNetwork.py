@@ -110,9 +110,10 @@ class SocialNetwork:
         tk.Button(self.root, text="Search User by ID", command=self.searchUserById).pack(pady=10)
 
     # def searchUserByNameWidget(self):
-    #     # Search User by Name Button
     #     tk.Button(self.root, text="Search User by Name", command=self.searchUserByName).pack(pady=10)
 
     def visualizeGraphWidget(self):
-        # Visualize Graph Button
         tk.Button(self.root, text="Visualize Graph", command=self.visualize).pack(pady=10)
+
+    def exitButton(self):
+        tk.Button(self.root, text="Exit", command=self.root.quit).pack(pady=10)
