@@ -134,3 +134,20 @@ class SocialNetwork:
                 messagebox.showwarning("Warning", "Age must be an integer.")
         else:
             messagebox.showwarning("Warning", "All fields must be filled.")
+
+    def removeUser(self):
+        userId = self.remove_user_id_entry.get()
+        if userId:
+            if self.graph.removeUser(userId):
+                messagebox.showinfo("Success", "User removed successfully.")
+            else:
+                messagebox.showwarning("Warning", "User not found.")
+
+    def addRelationship(self):
+        userId1 = self.user_id1_entry.get()
+        userId2 = self.user_id2_entry.get()
+        if userId1 and userId2:
+            if self.graph.addRelationship(userId1, userId2):
+                messagebox.showinfo("Success", "Relationship added successfully.")
+            else:
+                messagebox.showwarning("Warning", "One or both users not found.")
