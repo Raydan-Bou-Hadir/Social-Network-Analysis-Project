@@ -12,7 +12,6 @@ class SocialNetwork:
         self.root = root
         self.root.title("Social Network")
 
-        # Create UI Elements
         self.createWidgets()
 
     def createWidgets(self):
@@ -55,7 +54,6 @@ class SocialNetwork:
         self.add_user_button.pack(pady=5)
     
     def removeUserWidgets(self):
-        # Remove User Widgets
         tk.Label(self.root, text="Remove User").pack(pady=10)
 
         remove_user_frame = tk.Frame(self.root)
@@ -69,7 +67,6 @@ class SocialNetwork:
         self.remove_user_button.pack(pady=5)
 
     def addRelationshipWidgets(self):
-        # Add Relationship Widgets
         tk.Label(self.root, text="Add Relationship").pack(pady=10)
 
         add_relationship_frame = tk.Frame(self.root)
@@ -87,7 +84,6 @@ class SocialNetwork:
         self.add_relationship_button.pack(pady=5)
     
     def removeRelationshipWidgets(self):
-        # Remove Relationship Widgets
         tk.Label(self.root, text="Remove Relationship").pack(pady=10)
 
         remove_relationship_frame = tk.Frame(self.root)
@@ -103,3 +99,6 @@ class SocialNetwork:
 
         self.remove_relationship_button = tk.Button(self.root, text="Submit", command=self.removeRelationship)
         self.remove_relationship_button.pack(pady=5)
+    
+    def viewUserDetailsWidget(self):
+        tk.Button(self.root, text="View User Details", command=self.searchUserById).pack(pady=10)
